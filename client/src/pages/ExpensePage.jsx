@@ -70,19 +70,20 @@ function ExpensePage() {
         }
     };
 
-    const generatePieChart = () => {
+   const generatePieChart = () => {
         const existingChart = Chart.getChart('pieChart');
         if (existingChart) {
             existingChart.destroy(); 
         }
-
+        const filteredCategories = categoryExpense.filter(expense => expense.totalAmount > 0);
+    
         const pieChartCtx = document.getElementById('pieChart').getContext('2d');
         new Chart(pieChartCtx, {
             type: 'pie',
             data: {
-                labels: categoryExpense.map(expense => expense.CategoryName),
+                labels: filteredCategories.map(expense => expense.CategoryName),
                 datasets: [{
-                    data: categoryExpense.map(expense => expense.totalAmount),
+                    data: filteredCategories.map(expense => expense.totalAmount),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.5)',
                         'rgba(54, 162, 235, 0.5)',
@@ -110,21 +111,24 @@ function ExpensePage() {
             }
         });
     };
+    
 
     const generateGraph = () => {
         const existingChart = Chart.getChart('expenseGraph');
         if (existingChart) {
             existingChart.destroy(); 
         }
-
+    
+        const filteredCategories = categoryExpense.filter(expense => expense.totalAmount > 0);
+    
         const expenseGraphCtx = document.getElementById('expenseGraph');
         new Chart(expenseGraphCtx, {
             type: 'line',
             data: {
-                labels: categoryExpense.map(expense => expense.CategoryName),
+                labels: filteredCategories.map(expense => expense.CategoryName),
                 datasets: [{
                     label: 'Expense Amount',
-                    data: categoryExpense.map(expense => expense.totalAmount),
+                    data: filteredCategories.map(expense => expense.totalAmount),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
