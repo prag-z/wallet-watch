@@ -74,7 +74,7 @@ function AccountForm() {
     const username = localStorage.getItem('username');
   
     try {
-      const response = await fetch('http://localhost:5000/    ', {
+      const response = await fetch('http://localhost:5000/create-expense', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
