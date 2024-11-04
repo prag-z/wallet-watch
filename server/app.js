@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '506329',
+    password: '<password>',
     database: 'walletwatch'
 });
 
